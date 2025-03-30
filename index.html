@@ -4,55 +4,58 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project Offboarding</title>
-  <script>
-    const translations = {
-      ua: {
-        title: "Звільняти — це мистецтво. Найми митця.",
-        subtitle: "Токсичний? Безкорисний? Час прощатися.",
-        button: "📩 Зв'язатись і звільнити красиво",
-        about: "Мене звати Iryna. Я не HR. Я — звільнювач на виклик...",
-        footer: "Я прийшов не руйнувати. Я прийшов перезапустити."
-      },
-      en: {
-        title: "Firing is an art. Hire an artist.",
-        subtitle: "Toxic? Useless? Time to say goodbye.",
-        button: "📩 Get in touch and offboard with grace",
-        about: "My name is Iryna. I’m not HR. I’m a professional offboarder...",
-        footer: "I didn't come to destroy. I came to restart."
-      }
-    };
-    function switchLang(lang) {
-      document.getElementById("title").innerText = translations[lang].title;
-      document.getElementById("subtitle").innerText = translations[lang].subtitle;
-      document.getElementById("cta").innerText = translations[lang].button;
-      document.getElementById("about").innerText = translations[lang].about;
-      document.getElementById("footer").innerText = translations[lang].footer;
-    }
-    window.onload = () => switchLang("ua");
-  </script>
   <style>
     body {
       background-color: #000;
       color: white;
       font-family: sans-serif;
+      margin: 0;
       padding: 2rem;
       text-align: center;
     }
     .container {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
-    }
-    button {
-      margin: 1rem;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      cursor: pointer;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
     }
     .lang-buttons {
       display: flex;
       justify-content: center;
       gap: 1rem;
       margin-bottom: 2rem;
+    }
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      background: white;
+      color: black;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 10px;
+    }
+    .form-section {
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1rem;
+      border-radius: 15px;
+    }
+    footer {
+      margin-top: 3rem;
+      color: gray;
     }
   </style>
 </head>
@@ -61,15 +64,78 @@
     <button onclick="switchLang('ua')">🇺🇦 UA</button>
     <button onclick="switchLang('en')">🇬🇧 EN</button>
   </div>
+
   <div class="container">
     <h1 id="title"></h1>
     <p id="subtitle"></p>
-    <button id="cta"></button>
-    <h2>Про мене / About Me</h2>
-    <p id="about"></p>
+
+    <section>
+      <h2>About / Про мене</h2>
+      <p id="about"></p>
+    </section>
+
+    <section class="form-section">
+      <h3 id="contactHeader"></h3>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="" required />
+        <input type="email" id="email" placeholder="" required />
+        <textarea id="message" rows="4" placeholder=""></textarea>
+        <br />
+        <button type="submit" id="submitBtn"></button>
+      </form>
+    </section>
   </div>
-  <footer style="margin-top: 4rem; font-size: 0.9rem; color: gray">
-    <p id="footer"></p>
-  </footer>
+
+  <footer><p id="footer"></p></footer>
+
+  <script>
+    const translations = {
+      ua: {
+        title: "Звільняти — це мистецтво. Найми митця.",
+        subtitle: "Токсичний? Безкорисний? Час прощатися.",
+        about: "Мене звати Iryna. Я не HR. Я — звільнювач на виклик. Я вмію говорити «до побачення» так, щоб ніхто не грюкав дверима.",
+        contactHeader: "Зв'яжіться зі мною",
+        name: "Ваше ім’я",
+        email: "Ваш email",
+        message: "Коротко про ситуацію (можна анонімно)",
+        submit: "Надіслати",
+        footer: "Я прийшов не руйнувати. Я прийшов перезапустити."
+      },
+      en: {
+        title: "Firing is an art. Hire an artist.",
+        subtitle: "Toxic? Useless? Time to say goodbye.",
+        about: "My name is Iryna. I’m not HR. I’m your offboarding expert. I say goodbye with class — no door slamming.",
+        contactHeader: "Contact Me",
+        name: "Your name",
+        email: "Your email",
+        message: "Briefly describe the situation (anonymous is OK)",
+        submit: "Send",
+        footer: "I didn't come to destroy. I came to restart."
+      }
+    };
+
+    function switchLang(lang) {
+      const t = translations[lang];
+      document.getElementById("title").innerText = t.title;
+      document.getElementById("subtitle").innerText = t.subtitle;
+      document.getElementById("about").innerText = t.about;
+      document.getElementById("contactHeader").innerText = t.contactHeader;
+      document.getElementById("name").placeholder = t.name;
+      document.getElementById("email").placeholder = t.email;
+      document.getElementById("message").placeholder = t.message;
+      document.getElementById("submitBtn").innerText = t.submit;
+      document.getElementById("footer").innerText = t.footer;
+    }
+
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const subject = "New contact from offboarding site";
+      const body = document.getElementById("message").value;
+      window.location.href = `mailto:your@email.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+
+    window.onload = () => switchLang("ua");
+  </script>
 </body>
 </html>
