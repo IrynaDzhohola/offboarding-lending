@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Offboarding</title>
+  <script>
+    const translations = {
+      ua: {
+        title: "Звільняти — це мистецтво. Найми митця.",
+        subtitle: "Токсичний? Безкорисний? Час прощатися.",
+        button: "📩 Зв'язатись і звільнити красиво",
+        about: "Мене звати Iryna. Я не HR. Я — звільнювач на виклик...",
+        footer: "Я прийшов не руйнувати. Я прийшов перезапустити."
+      },
+      en: {
+        title: "Firing is an art. Hire an artist.",
+        subtitle: "Toxic? Useless? Time to say goodbye.",
+        button: "📩 Get in touch and offboard with grace",
+        about: "My name is Iryna. I’m not HR. I’m a professional offboarder...",
+        footer: "I didn't come to destroy. I came to restart."
+      }
+    };
+    function switchLang(lang) {
+      document.getElementById("title").innerText = translations[lang].title;
+      document.getElementById("subtitle").innerText = translations[lang].subtitle;
+      document.getElementById("cta").innerText = translations[lang].button;
+      document.getElementById("about").innerText = translations[lang].about;
+      document.getElementById("footer").innerText = translations[lang].footer;
+    }
+    window.onload = () => switchLang("ua");
+  </script>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: sans-serif;
+      padding: 2rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    button {
+      margin: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .lang-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-buttons">
+    <button onclick="switchLang('ua')">🇺🇦 UA</button>
+    <button onclick="switchLang('en')">🇬🇧 EN</button>
+  </div>
+  <div class="container">
+    <h1 id="title"></h1>
+    <p id="subtitle"></p>
+    <button id="cta"></button>
+    <h2>Про мене / About Me</h2>
+    <p id="about"></p>
+  </div>
+  <footer style="margin-top: 4rem; font-size: 0.9rem; color: gray">
+    <p id="footer"></p>
+  </footer>
+</body>
+</html>
